@@ -32,8 +32,8 @@ namespace FTC_MagazijnManagement.Persistence
         #region Apparaat
         internal static List<Apparaat> GetApparatenFromDb()
         {
-            var apparaatMapper = new ApparaatMapper(ConnectionString);
-            return apparaatMapper.GetApparaatFromDb();
+            var apparaatmapper = new ApparaatMapper(ConnectionString);
+            return apparaatmapper.GetApparaatFromDb();
         }
 
         internal static void AddApparaatToDb(Apparaat apparaat)
@@ -58,13 +58,26 @@ namespace FTC_MagazijnManagement.Persistence
         #region Levering
         internal static List<Levering> GetLeveringenFromDb()
         {
-
+            var leveringmapper = new LeveringMapper(ConnectionString);
+            return leveringmapper.GetLeveringen();
         }
 
-        internal static void UpdateLevering(Levering levering)
+        internal static void AddLeveringToDb(Levering levering, int apparaatid)
         {
-            var leveringMapper = new LeveringMapper(ConnectionString);
-            leveringMapper.UpdateLevering(levering);
+            var leveringmapper = new LeveringMapper(ConnectionString);
+            leveringmapper.AddLevering(levering, apparaatid);
+        }
+
+        internal static void UpdateLeveringToDb(Levering levering)
+        {
+            var leveringmapper = new LeveringMapper(ConnectionString);
+            leveringmapper.UpdateLevering(levering);
+        }
+
+        internal static void RemoveLeveringFromDb(Levering levering)
+        {
+            var leveringmapper = new LeveringMapper(ConnectionString);
+            leveringmapper.RemoveLevering(levering);
         }
         #endregion
     }

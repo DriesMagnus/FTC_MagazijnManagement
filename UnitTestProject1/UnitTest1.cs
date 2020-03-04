@@ -1,4 +1,5 @@
 ﻿using FTC_MagazijnManagement.Business;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestProject1
 {
@@ -13,6 +14,8 @@ namespace UnitTestProject1
             delllaptop.NieuweLevering("3/5", 20);
 
             Assert.AreEqual(delllaptop.TotaleVoorraad(), 20);
+
+            c.RemoveApparaat(delllaptop.Id);
         }
 
         [TestMethod]
@@ -21,7 +24,9 @@ namespace UnitTestProject1
             var c = new Controller();
             var delllaptop = c.AddApparaat("Dell", "Laptop");
 
-            Assert.AreEqual(c.GetapparaatList().Count, 1);
+            Assert.AreEqual(c.GetApparaatList().Count, 1);
+
+            c.RemoveApparaat(delllaptop.Id);
         }
 
         [TestMethod]
@@ -29,10 +34,12 @@ namespace UnitTestProject1
         {
             var c = new Controller();
             var delllaptop = c.AddApparaat("Dell", "Laptop");
-            delllaptop.NieuweLevering("3/5", 20);
+            //("3/5", 20);
             delllaptop.NieuweLevering("5/6", 40);
 
             Assert.AreEqual(delllaptop.TotaleVoorraad(), 60);
+
+            c.RemoveApparaat(delllaptop.Id);
         }
 
         [TestMethod]
@@ -42,9 +49,9 @@ namespace UnitTestProject1
             var delllaptop = c.AddApparaat("Dell", "Laptop");
 
             delllaptop.Naam = "HP";
-            c.Updateapparaat(delllaptop);
+            c.UpdateApparaat(delllaptop);
 
-            Assert.AreEqual(c.Getapparaat(delllaptop.Id).Naam, "HP");
+            Assert.AreEqual(c.GetApparaat(delllaptop.Id).Naam, "HP");
         }
 
         [TestMethod]
@@ -53,7 +60,7 @@ namespace UnitTestProject1
             var c = new Controller();
             var delllaptop = c.AddApparaat("Dell", "Laptop");
 
-            Assert.AreEqual(c.Getapparaat(1), delllaptop);
+            Assert.AreEqual(c.GetApparaat(1), delllaptop);
         }
     }
 }

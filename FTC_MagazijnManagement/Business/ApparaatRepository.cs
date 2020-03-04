@@ -4,9 +4,9 @@ namespace FTC_MagazijnManagement.Business
 {
     internal class ApparaatRepository : Repository<Apparaat>
     {
-        internal override void AddItem(Apparaat entity)
+        internal override void AddItem(Apparaat apparaat)
         {
-            Items.Add(entity);
+            Items.Add(apparaat);
         }
 
         internal override Apparaat GetItem(int id)
@@ -24,19 +24,26 @@ namespace FTC_MagazijnManagement.Business
             Apparaat item = GetItem(id);
 
             Items.Remove(item);
-            //Persistence.Controller.RemoveApparaatInDb(item);
-            //foreach (var levering in item.GetLeveringen())
-            //{
-            //    Persistence.Controller.RemoveLeveringInDb(levering);
-            //}
+            Persistence.Controller.RemoveApparaatFromDb(item);
+            foreach (var levering in item._leveringen)
+            {
+                Persistence.Controller.RemoveLeveringFromDb(levering);
+            }
         }
 
         internal override Apparaat UpdateItem(Apparaat apparaat)
         {
             Apparaat item = GetItem(apparaat.Id);
-            //verander alle waarden van item.waarde naar apparaat.waarde
-            //zet item.levering naar de nieuwe levering lijst
-            //voor elke levering in item.levering doe persistence.controller.UpdateLevering
+            item._leveringen = apparaat._leveringen;
+            item.Naam = apparaat.Naam;
+            item.Type = apparaat.Type;
+
+            Persistence.Controller.UpdateApparaatToDb(item);
+            foreach (var levering in item._leveringen)
+            {
+                Persistence.Controller.UpdateLeveringToDb(levering);
+            }
+
             return item;
         }
 

@@ -9,9 +9,20 @@ namespace FTC_MagazijnManagement.Business
 
         public Controller()
         {
-            //_apparaatRepository.Load(Persistence.Controller.GetApparaten());
+            _apparaatRepository.Load(Persistence.Controller.GetApparatenFromDb());
         }
-
+        public Apparaat GetApparaat(int id)
+        {
+            var toGet = _apparaatRepository.GetItem(id);
+            if (toGet != null)
+            {
+                return toGet;
+            }
+            else
+            {
+                throw new Exception("apparaat met id: " + id + " niet gevonden.");
+            }
+        }
         public Apparaat AddApparaat(string naam, string type)
         {
             var toAdd = new Apparaat(_apparaatRepository.GetNextId(), naam, type);
@@ -19,25 +30,20 @@ namespace FTC_MagazijnManagement.Business
             return toAdd;
         }
 
-        public Apparaat Updateapparaat(Apparaat apparaat)
+        public Apparaat UpdateApparaat(Apparaat apparaat)
         {
             var toUpdate = _apparaatRepository.GetItem(apparaat.Id);
             if (toUpdate != null)
             {
                 return _apparaatRepository.UpdateItem(toUpdate);
             }
-            throw new Exception("Apparaat met id: " + apparaat.Id + " niet gevonden.");
+            else
+            {
+                throw new Exception("Apparaat met id: " + apparaat.Id + " niet gevonden.");
+            }
         }
 
-        public Apparaat Getapparaat(int id)
-        {
-            var toGet = _apparaatRepository.GetItem(id);
-            if (toGet != null)
-                return toGet;
-            throw new Exception("apparaat met id: " + id + " niet gevonden.");
-        }
-
-        public void Removeapparaat(int id)
+        public void RemoveApparaat(int id)
         {
             var toRemove = _apparaatRepository.GetItem(id);
             if (toRemove != null)
@@ -50,9 +56,18 @@ namespace FTC_MagazijnManagement.Business
             }
         }
 
-        public List<Apparaat> GetapparaatList()
+        public List<Apparaat> GetApparaatList()
         {
             return _apparaatRepository.GetAll();
+        }
+
+        public Levering AddLevering(int apparaatid, string locatie, int aantal)
+        {
+            var toAdd = new Levering(apparaatid, locatie, aantal);
+            var item = _apparaatRepository.GetItem(apparaatid);
+            item._leveringen.Add(toAdd);
+            _apparaatRepository.UpdateItem(item);
+            return toAdd;
         }
     }
 }
