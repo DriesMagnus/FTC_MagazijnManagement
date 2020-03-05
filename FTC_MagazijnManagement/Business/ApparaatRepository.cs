@@ -26,10 +26,7 @@ namespace FTC_MagazijnManagement.Business
 
             Items.Remove(item);
             Persistence.Controller.RemoveApparaatFromDb(item);
-            foreach (var levering in item._leveringen)
-            {
-                Persistence.Controller.RemoveLeveringInDb(levering);
-            }
+            
         }
 
         internal override Apparaat UpdateItem(Apparaat apparaat)

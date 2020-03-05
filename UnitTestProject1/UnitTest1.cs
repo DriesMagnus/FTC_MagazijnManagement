@@ -10,12 +10,12 @@ namespace UnitTestProject1
         public void TestVoorraad()
         {
             var c = new Controller();
-            var delllaptop = c.AddApparaat("Dell", "Laptop");
-            c.AddLevering(delllaptop.Id, "3/5", 20);
+            // var delllaptop = c.AddApparaat("Dell", "Laptop");
+            // c.AddLevering(delllaptop.Id, "3/5", 20);
 
             //Assert.AreEqual(delllaptop.TotaleVoorraad(), 20);
 
-          //  c.RemoveApparaat(delllaptop.Id);
+           c.RemoveApparaat(4);
         }
 
         [TestMethod]

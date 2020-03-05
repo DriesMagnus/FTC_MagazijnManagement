@@ -81,6 +81,7 @@ namespace FTC_MagazijnManagement.Business
             var toAdd = new Levering(apparaatid, locatie, aantal);
             var item = _apparaatRepository.GetItem(apparaatid);
             item._leveringen.Add(toAdd);//VOEGT NIET EENS IETS FUCKING TOE AAN DE KANKER DATABASE TODO 
+            Persistence.Controller.AddLeveringToDb(toAdd, apparaatid);
             _apparaatRepository.UpdateItem(item);
             return toAdd;
         }
