@@ -7,6 +7,7 @@ namespace FTC_MagazijnManagement.Business
         internal override void AddItem(Apparaat apparaat)
         {
             Items.Add(apparaat);
+            Persistence.Controller.AddApparaatToDb(apparaat);
         }
 
         internal override Apparaat GetItem(int id)
@@ -27,7 +28,7 @@ namespace FTC_MagazijnManagement.Business
             Persistence.Controller.RemoveApparaatFromDb(item);
             foreach (var levering in item._leveringen)
             {
-                Persistence.Controller.RemoveLeveringFromDb(levering);
+                Persistence.Controller.RemoveLeveringInDb(levering);
             }
         }
 
@@ -41,7 +42,7 @@ namespace FTC_MagazijnManagement.Business
             Persistence.Controller.UpdateApparaatToDb(item);
             foreach (var levering in item._leveringen)
             {
-                Persistence.Controller.UpdateLeveringToDb(levering);
+                Persistence.Controller.UpdateLeveringInDb(levering);
             }
 
             return item;

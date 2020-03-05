@@ -59,25 +59,25 @@ namespace FTC_MagazijnManagement.Persistence
         internal static List<Levering> GetLeveringenFromDb()
         {
             var leveringmapper = new LeveringMapper(ConnectionString);
-            return leveringmapper.GetLeveringen();
+            return leveringmapper.GetLeveringenFromDb();
         }
 
         internal static void AddLeveringToDb(Levering levering, int apparaatid)
         {
             var leveringmapper = new LeveringMapper(ConnectionString);
-            leveringmapper.AddLevering(levering, apparaatid);
+            leveringmapper.AddLeveringToDb(levering, apparaatid);
         }
 
-        internal static void UpdateLeveringToDb(Levering levering)
+        internal static void UpdateLeveringInDb(Levering levering)
         {
             var leveringmapper = new LeveringMapper(ConnectionString);
-            leveringmapper.UpdateLevering(levering);
+            leveringmapper.UpdateLeveringInDb(levering);
         }
 
-        internal static void RemoveLeveringFromDb(Levering levering)
+        internal static void RemoveLeveringInDb(Levering levering)
         {
             var leveringmapper = new LeveringMapper(ConnectionString);
-            leveringmapper.RemoveLevering(levering);
+            leveringmapper.RemoveLeveringInDb(levering);
         }
         #endregion
     }

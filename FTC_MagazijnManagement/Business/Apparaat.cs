@@ -28,6 +28,10 @@ namespace FTC_MagazijnManagement.Business
             return levering;
         }
 
+        public void Load(List<Levering> lijst)
+        {
+            _leveringen.AddRange(lijst);
+        }
         public int TotaleVoorraad()
         {
             var voorraad = 0;
@@ -35,7 +39,5 @@ namespace FTC_MagazijnManagement.Business
 
             return voorraad;
         }
-
-      
     }
 }

@@ -16,16 +16,12 @@ namespace FTC_MagazijnManagement.Persistence
 
         internal Apparaat GetApparaatFromLevering(Levering levering)
         {
-            var apparaten = ApparaatRepository.Items;
-            Apparaat returnapparaat = null;
 
-            foreach (var apparaat in apparaten)
-                if (apparaat._leveringen.Contains(levering))
-                    returnapparaat = apparaat;
-            return returnapparaat;
+            return ApparaatRepository.Items.Find(x => x.Id == levering.ApparaatId);
+
         }
 
-        internal List<Levering> GetLeveringen()
+        internal List<Levering> GetLeveringenFromDb()
         {
             var _leveringen = new List<Levering>();
 
@@ -48,7 +44,7 @@ namespace FTC_MagazijnManagement.Persistence
             return _leveringen;
         }
 
-        internal void AddLevering(Levering levering, int apparaatid)
+        internal void AddLeveringToDb(Levering levering, int apparaatid)
         {
             var connection = new MySqlConnection(_connectionString);
             var command = new MySqlCommand(
@@ -65,31 +61,23 @@ namespace FTC_MagazijnManagement.Persistence
             connection.Close();
         }
 
-        internal void UpdateLevering(Levering levering)
+        internal void UpdateLeveringInDb(Levering levering)
         {
             var connection = new MySqlConnection(_connectionString);
             var command = new MySqlCommand(
-                "UPDATE levering SET Locatie = @locatie, Aantal = @aantal" +
+                "UPDATE levering SET Locatie = @locatie, Aantal = @aantal, Apparaat_Id = @apparaat_id" +
                 " WHERE Apparaat_Id=@apparaat_id"
                 , connection);
             command.Parameters.AddWithValue("locatie", levering.Locatie);
             command.Parameters.AddWithValue("apparaat_id", levering.ApparaatId);
             command.Parameters.AddWithValue("aantal", levering.Aantal);
-
-            var apparaat = GetApparaatFromLevering(levering);
-            if (apparaat != null)
-            {
-                var index = command.CommandText.IndexOf("WHERE", StringComparison.Ordinal);
-                command.CommandText = command.CommandText.Insert(index - 1, ", Apparaat_id = @apparaat_id");
-                command.Parameters.AddWithValue("apparaat_id", apparaat.Id);
-            }
-
+            
             connection.Open();
             command.ExecuteNonQuery();
             connection.Close();
         }
 
-        internal void RemoveLevering(Levering levering)
+        internal void RemoveLeveringInDb(Levering levering)
         {
             var apparaat = GetApparaatFromLevering(levering);
             
