@@ -11,7 +11,7 @@ namespace UnitTestProject1
         {
             var c = new Controller();
             var delllaptop = c.AddApparaat("Dell", "Laptop");
-            c.AddLevering(delllaptop.Id, "3/5", 20);
+            c.AddLevering(delllaptop.Id, "(3,5)", 20);
 
             Assert.AreEqual(delllaptop.TotaleVoorraad(), 20);
 
@@ -34,12 +34,12 @@ namespace UnitTestProject1
         {
             var c = new Controller();
             var delllaptop = c.AddApparaat("Dell", "Laptop");
-            c.AddLevering(delllaptop.Id, "3/5", 20); //this one has data of
-            c.AddLevering(delllaptop.Id, "5/6", 40); //this method in db TODO: fix this
+            c.AddLevering(delllaptop.Id, "(3,5)", 20);
+            c.AddLevering(delllaptop.Id, "(5,6)", 40);
 
             Assert.AreEqual(delllaptop.TotaleVoorraad(), 60);
 
-            //c.RemoveApparaat(delllaptop.Id);
+            c.RemoveApparaat(delllaptop.Id);
         }
 
         [TestMethod]

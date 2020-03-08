@@ -49,7 +49,7 @@ namespace FTC_MagazijnManagement.Persistence
             var connection = new MySqlConnection(_connectionString);
             var command = new MySqlCommand(
                 "INSERT INTO levering (Apparaat_Id, Aantal, Locatie)" +
-                " VALUES (@apparaat_id, @aantal, locatie)"
+                " VALUES (@apparaat_id, @aantal, @locatie)"
                 , connection);
 
             command.Parameters.AddWithValue("apparaat_id", apparaatid);
