@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Home - Magazijn Management</title>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="body1" runat="server">
     <!-- Masthead-->
     <header class="masthead">
         <div class="container h-100">
@@ -107,7 +107,7 @@
     <div class="text-center bg-primary">
         <img src="assets\img\profilepic.jpg" alt="Avatar" style="border-radius: 50%; width: 200px; margin-top: -200px; margin-bottom: -200px; border: 5px solid white; box-shadow: 0px 0px 50px black">
     </div>
-    <!-- About section-->
+    <!-- Creator section-->
     <section class="page-section bg-primary" id="creator">
         <div class="container">
             <div class="row justify-content-center">
