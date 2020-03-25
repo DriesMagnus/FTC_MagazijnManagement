@@ -36,7 +36,7 @@
                             <li class="nav-item pdt"><a class="nav-link js-scroll-trigger" href="#services">Diensten</a></li>
                             <li class="nav-item pdt"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
                             <li class="nav-item pdt"><a class="nav-link js-scroll-trigger" href="#creator">Over mij</a></li>
-                            <li class="nav-item"><a class="btn btn-primary btn-sm" href="#">Log in</a></li>
+                            <li class="nav-item"><a class="btn btn-primary btn-sm" href="/Users/Apparaten.aspx">Log in</a></li>
                         </ul>
                     </asp:ContentPlaceHolder>
                 </div>

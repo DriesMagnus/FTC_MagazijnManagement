@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MagazijnManagement.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="FTC_MagazijnManagementWeb.WebForm1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MagazijnManagement.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="FTC_MagazijnManagementWeb.WebForm1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Home - Magazijn Management</title>
