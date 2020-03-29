@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MagazijnManagement.master.cs" Inherits="FTC_MagazijnManagementWeb.MagazijnManagement" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MagazijnManagement.Master.cs" Inherits="FTC_MagazijnManagementWeb.MagazijnManagement" %>
 
 <!DOCTYPE html>
 
@@ -16,30 +16,18 @@
     <!-- Third party plugin CSS-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
     <!-- CSS file (inludes Bootstrap v4.4.1) -->
-    <link rel="shortcut icon" href="~\assets\icon\FTC_Icon.png" />
+    <link rel="shortcut icon" href="~/assets\icon\FTC_Icon.png" />
     <link href="css/styles.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server">
         <title>Onder constructie - Magazijn Management</title>
     </asp:ContentPlaceHolder>
 </head>
 <body id="page-top">
-    <form id="form1" runat="server">
+<form id="form1" runat="server">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">Magazijn Management</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <asp:ContentPlaceHolder ID="nav" runat="server">
-                        <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                            <li class="nav-item pdt"><a class="nav-link js-scroll-trigger" href="#about">Over ons</a></li>
-                            <li class="nav-item pdt"><a class="nav-link js-scroll-trigger" href="#services">Diensten</a></li>
-                            <li class="nav-item pdt"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
-                            <li class="nav-item pdt"><a class="nav-link js-scroll-trigger" href="#creator">Over mij</a></li>
-                            <li class="nav-item"><a class="btn btn-primary btn-sm" href="/Users/Apparaten.aspx">Log in</a></li>
-                        </ul>
-                    </asp:ContentPlaceHolder>
-                </div>
+                <asp:ContentPlaceHolder ID="nav" runat="server" />
             </div>
         </nav>
         <div>

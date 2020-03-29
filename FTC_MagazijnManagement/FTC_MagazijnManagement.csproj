@@ -50,10 +50,13 @@
     <Compile Include="Business\ApparaatRepository.cs" />
     <Compile Include="Business\Controller.cs" />
     <Compile Include="Business\Entity.cs" />
+    <Compile Include="Business\Gebruiker.cs" />
+    <Compile Include="Business\GebruikersRepository.cs" />
     <Compile Include="Business\Levering.cs" />
     <Compile Include="Business\Repository.cs" />
     <Compile Include="Persistence\ApparaatMapper.cs" />
     <Compile Include="Persistence\Controller.cs" />
+    <Compile Include="Persistence\GebruikerMapper.cs" />
     <Compile Include="Persistence\LeveringMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

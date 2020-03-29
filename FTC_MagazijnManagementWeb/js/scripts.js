@@ -60,4 +60,9 @@
     }
   });
 
+  // Prevent dropdown menu from closing when click inside the form
+  $(document).on("click", ".dropdown-menu", function(e){
+      e.stopPropagation();
+  });
+
 })(jQuery); // End of use strict

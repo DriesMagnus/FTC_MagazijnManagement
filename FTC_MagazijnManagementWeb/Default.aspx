@@ -3,6 +3,55 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Home - Magazijn Management</title>
 </asp:Content>
+<asp:Content ContentPlaceHolderID="nav" runat="server">
+    <asp:LoginView ID="LoginView1" runat="server">
+        <AnonymousTemplate>
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">Magazijn Management</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav navbar-right ml-auto my-2 my-lg-0">
+                    <li class="nav-item pdt"><a class="nav-link js-scroll-trigger" href="#about">Over ons</a></li>
+                    <li class="nav-item pdt"><a class="nav-link js-scroll-trigger" href="#services">Diensten</a></li>
+                    <li class="nav-item pdt"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+                    <li class="nav-item pdt"><a class="nav-link js-scroll-trigger" href="#creator">Over mij</a></li>
+                    <li class="nav-item"><a data-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle" href="#">Log in</a>
+                        <ul class="dropdown-menu form-wrapper">
+                            <li>
+                                <div>
+                                    <div class="form-group">
+                                        <input type="text" name="gebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required="required" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="paswoord" class="form-control" placeholder="Wachtwoord" required="required" />
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label runat="server" ID="foutboodschap" EnableViewState="False" Visible="False" CssClass="alert alert-danger justify-content-center autowidth" />
+                                    </div>
+                                    <asp:Button ID="btnAanmelden" runat="server" CssClass="btn btn-primary btn-block" Text="Log in" OnClick="btnAanmelden_Click" />
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </AnonymousTemplate>
+        <LoggedInTemplate>
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">Magazijn Management</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav navbar-right ml-auto my-2 my-lg-0">
+                    <li class="nav-item pdt"><a class="nav-link js-scroll-trigger" href="#about">Over ons</a></li>
+                    <li class="nav-item pdt"><a class="nav-link js-scroll-trigger" href="#services">Diensten</a></li>
+                    <li class="nav-item pdt"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+                    <li class="nav-item pdt"><a class="nav-link js-scroll-trigger" href="#creator">Over mij</a></li>
+                    <li class="nav-item"><a class="btn btn-primary btn-sm" href="Users/Apparaten.aspx">Welkom
+                        <asp:LoginName ID="LoginName1" runat="server" />
+                    </a></li>
+                </ul>
+            </div>
+        </LoggedInTemplate>
+    </asp:LoginView>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body1" runat="server">
     <!-- Masthead-->
     <header class="masthead">
@@ -13,9 +62,12 @@
                     <hr class="divider my-4" />
                 </div>
                 <div class="col-lg-9 align-self-baseline">
-                    <p class="text-white-75 font-weight-light mb-5">Heeft u een nieuwe laptop, desktop, tablet, ... nodig maar wilt u liever minder betalen?
+                    <p class="text-white-75 font-weight-light mb-5">
+                        Heeft u een nieuwe laptop, desktop, tablet, ... nodig maar wilt u liever minder betalen?
+                       
                         <br />
-                        Bij P-Generation bent u aan het juiste adres!</p>
+                        Bij P-Generation bent u aan het juiste adres!
+                    </p>
                     <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Meer details</a>
                 </div>
             </div>
@@ -114,8 +166,12 @@
                 <div class="col-lg-8 text-center">
                     <h2 class="text-white mt-0">Over mij</h2>
                     <hr class="divider light my-4" />
-                    <p class="text-white-75 font-weight-light mb-5">Ik ben Dries Magnus en ik ben 18 jaar. Ik studeer dit jaar af in de richting Informaticabeheer aan de Secundaire Handelsschool Sint-Lodewijk.<br/>Voor mijn eindwerk moest ik een web-applicatie maken die de gebruiker toelaat om een magazijn te beheren die apparaten en leveringen bevat.<br/><br/>Om toegang te krijgen tot deze applicatie, druk op het knop hieronder.</p>
-                    <a class="btn btn-light btn-xl js-scroll-trigger" href="#">Log in</a>
+                    <p class="text-white-75 font-weight-light mb-5">
+                        Ik ben Dries Magnus en ik ben 18 jaar. Ik studeer dit jaar af in de richting Informaticabeheer aan de Secundaire Handelsschool Sint-Lodewijk.<br />
+                        Voor mijn eindwerk moest ik een web-applicatie maken die de gebruiker toelaat om een magazijn te beheren die apparaten en leveringen bevat.<br />
+                        <br />
+                        Om toegang te krijgen tot deze applicatie, druk op de oranje login knop rechtsboven.
+                    </p>
                 </div>
             </div>
         </div>

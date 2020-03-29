@@ -16,18 +16,29 @@ namespace FTC_MagazijnManagement.Persistence
             {
                 if (_connectionString == "")
                 {
-                    if (ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location)
-                            .ConnectionStrings.ConnectionStrings.Count ==
+                    if (ConfigurationManager.ConnectionStrings.Count ==
                         0) throw new Exception("Connection string not configured");
 
-                    _connectionString = ConfigurationManager
-                        .OpenExeConfiguration(Assembly.GetExecutingAssembly().Location).ConnectionStrings
-                        .ConnectionStrings["Database"].ConnectionString;
+                    _connectionString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
                 }
 
                 return _connectionString;
             }
         }
+
+        #region Gebruiker
+        internal static List<Gebruiker> GetGebruikers()
+        {
+            GebruikerMapper mapper = new GebruikerMapper(ConnectionString);
+            return mapper.GetGebruikersFromDb();
+        }
+
+        internal static void AddGebruiker(Gebruiker gebruiker)
+        {
+            GebruikerMapper mapper = new GebruikerMapper(ConnectionString);
+            mapper.AddGebruikerToDb(gebruiker);
+        }
+        #endregion
 
         #region Apparaat
         internal static List<Apparaat> GetApparatenFromDb()

@@ -9,9 +9,15 @@ namespace FTC_MagazijnManagement.Business
         /// </summary>
         public List<Levering> _leveringen;
 
-        public string Naam;
+        public int LeveringAmount
+        {
+            get { return _leveringen.Count; }
+        }
 
-        public string Type;
+
+        public string Naam { get; set; }
+
+        public string Type { get; set; }
 
         internal Apparaat(int id, string naam, string type) : base(id)
         {

@@ -12,11 +12,55 @@ namespace FTC_MagazijnManagement.Business
         {
             _apparaatRepository.Load(Persistence.Controller.GetApparatenFromDb());
             List<Levering> leveringen = Persistence.Controller.GetLeveringenFromDb();
+            GebruikersRepository.Load(Persistence.Controller.GetGebruikers());
             foreach (var apparaat in _apparaatRepository.GetAll())
             {
                 apparaat.Load(leveringen.Where(x => x.ApparaatId == apparaat.Id).ToList());
             }
         }
+
+        #region Gebruiker
+        public Gebruiker CurrentUser { get; private set; }
+
+        public bool Aanmelden(string gebruikersnaam, string paswoord)
+        {
+            var gebruikers = GebruikersRepository.Items;
+
+            var gebruiker = gebruikers.Find(x =>
+                x.Gebruikersnaam.Equals(gebruikersnaam, StringComparison.CurrentCultureIgnoreCase));
+            if (gebruiker == null) return false;
+            var aangemeld = gebruiker.Aanmelden(paswoord);
+            if (aangemeld) CurrentUser = gebruiker;
+            return aangemeld;
+        }
+
+        public void Afmelden()
+        {
+            CurrentUser = null;
+        }
+
+        public Gebruiker Registreer(string gebruikersnaam, string paswoord)
+        {
+            var gList = GebruikersRepository.Items;
+
+            var gebruiker = gList.Find(g => g.Gebruikersnaam.Equals(gebruikersnaam,
+                StringComparison.CurrentCultureIgnoreCase));
+
+            if (gebruiker != null)
+
+            {
+                throw new ArgumentException("Deze gebruikersnaam bestaat reeds");
+            }
+
+            var id = GebruikersRepository.GetNextId();
+
+            gebruiker = new Gebruiker(id, gebruikersnaam, paswoord);
+
+            GebruikersRepository.AddItem(gebruiker);
+
+            return gebruiker;
+        }
+        #endregion
 
         #region Apparaat
         public Apparaat GetApparaat(int id)
@@ -38,17 +82,13 @@ namespace FTC_MagazijnManagement.Business
             return toAdd;
         }
 
-        public Apparaat UpdateApparaat(Apparaat apparaat)
+        public Apparaat UpdateApparaat(int id, string newName, string newType)
         {
-            var toUpdate = _apparaatRepository.GetItem(apparaat.Id);
-            if (toUpdate != null)
-            {
-                return _apparaatRepository.UpdateItem(toUpdate);
-            }
-            else
-            {
-                throw new Exception("Apparaat met id: " + apparaat.Id + " niet gevonden.");
-            }
+            var toUpdate = _apparaatRepository.GetItem(id);
+            toUpdate.Naam = newName;
+            toUpdate.Type = newType;
+
+            return _apparaatRepository.UpdateItem(toUpdate);
         }
 
         public void RemoveApparaat(int id)
@@ -76,6 +116,12 @@ namespace FTC_MagazijnManagement.Business
             return Persistence.Controller.GetLeveringenFromDb();
         }
 
+        public Levering GetLevering(int apparaatid, string locatie)
+        {
+            var leveringen = GetAllLeveringen(GetApparaat(apparaatid));
+            return leveringen.Find(levering => levering.Locatie == locatie);
+        }
+
         public Levering AddLevering(int apparaatid, string locatie, int aantal)
         {
             var toAdd = new Levering(apparaatid, locatie, aantal);
@@ -93,6 +139,12 @@ namespace FTC_MagazijnManagement.Business
 
         public void RemoveLevering(Levering levering)
         {
+            Persistence.Controller.RemoveLeveringInDb(levering);
+        }
+
+        public void RemoveLevering(int apparaatid, string locatie)
+        {
+            var levering = GetLevering(apparaatid, locatie);
             Persistence.Controller.RemoveLeveringInDb(levering);
         }
         #endregion

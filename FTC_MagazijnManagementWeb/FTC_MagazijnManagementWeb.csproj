@@ -71,6 +71,7 @@
     <Content Include="assets\img\bg-homepage.jpg" />
     <Content Include="assets\img\profilepic.jpg" />
     <Content Include="css\styles.css" />
+    <Content Include="Global.asax" />
     <Content Include="js\scripts.js" />
     <Content Include="Users\Apparaten.aspx" />
     <Content Include="Users\Leveringen.aspx" />
@@ -78,6 +79,9 @@
     <Content Include="Default.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="MagazijnManagement.Master.cs">
       <DependentUpon>MagazijnManagement.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -111,6 +115,7 @@
   <ItemGroup>
     <Content Include="MagazijnManagement.Master" />
     <None Include="packages.config" />
+    <Content Include="Users\Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -118,7 +123,12 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FTC_MagazijnManagement\FTC_MagazijnManagement.csproj">
+      <Project>{F93ACD14-4CD7-45FF-AB9B-48CA157B1CB7}</Project>
+      <Name>FTC_MagazijnManagement</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
