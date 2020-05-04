@@ -6,16 +6,23 @@ namespace FTC_MagazijnManagement.Business
 {
     public class Controller
     {
-        private readonly ApparaatRepository _apparaatRepository = new ApparaatRepository();
-
+        private static readonly ApparaatRepository _apparaatRepository = new ApparaatRepository();
+        private static bool _loaded = false;
+        
         public Controller()
         {
-            _apparaatRepository.Load(Persistence.Controller.GetApparatenFromDb());
-            List<Levering> leveringen = Persistence.Controller.GetLeveringenFromDb();
-            GebruikersRepository.Load(Persistence.Controller.GetGebruikers());
-            foreach (var apparaat in _apparaatRepository.GetAll())
+            if (!_loaded)
             {
-                apparaat.Load(leveringen.Where(x => x.ApparaatId == apparaat.Id).ToList());
+                List<Levering> _leveringen = new List<Levering>();
+                _apparaatRepository.Load(Persistence.Controller.GetApparatenFromDb());
+                _leveringen = Persistence.Controller.GetAllLeveringenFromDb();
+                GebruikersRepository.Load(Persistence.Controller.GetGebruikers());
+                foreach (var apparaat in _apparaatRepository.GetAll())
+                {
+                    apparaat.Load(_leveringen.Where(x => x.ApparaatId == apparaat.Id).ToList());
+                }
+
+                _loaded = true;
             }
         }
 
@@ -113,7 +120,12 @@ namespace FTC_MagazijnManagement.Business
         #region Levering
         public List<Levering> GetAllLeveringen(Apparaat apparaat)
         {
-            return Persistence.Controller.GetLeveringenFromDb();
+            return Persistence.Controller.GetLeveringenFromDb(apparaat.Id);
+        }
+
+        public List<Levering> GetAllLeveringen(int apparaatid)
+        {
+            return Persistence.Controller.GetLeveringenFromDb(apparaatid);
         }
 
         public Levering GetLevering(int apparaatid, string locatie)
@@ -131,10 +143,14 @@ namespace FTC_MagazijnManagement.Business
             return toAdd;
         }
 
-        public Levering UpdateLevering(Levering levering)
+        public Levering UpdateLevering(int apparaatid, int aantal, string locatie)
         {
-            Persistence.Controller.UpdateLeveringInDb(levering);
-            return levering;
+            var toUpdate = GetLevering(apparaatid, locatie);
+            toUpdate.Aantal = aantal;
+            toUpdate.Locatie = locatie;
+            toUpdate.ApparaatId = apparaatid;
+            Persistence.Controller.UpdateLeveringInDb(toUpdate);
+            return toUpdate;
         }
 
         public void RemoveLevering(Levering levering)

@@ -10184,3 +10184,7 @@ header.masthead h1 {
     margin-right: auto;
     text-align: center;
 }
+
+.bg-gray {
+    background-color: #ececf6 !important;
+}

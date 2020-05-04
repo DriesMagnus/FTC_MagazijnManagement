@@ -1,9 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MagazijnManagement.Master" AutoEventWireup="true" CodeBehind="Leveringen.aspx.cs" Inherits="FTC_MagazijnManagementWeb.Users.Leveringen" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Leveringen - Magazijn Management</title>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="nav" runat="server">
-    <a class="navbar-brand navbar-alt" href="/Default.aspx">Magazijn Management</a>
+    <a class="navbar-brand navbar-alt" href="../Default.aspx">Magazijn Management</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-alt ml-auto my-2 my-lg-0">
@@ -21,14 +22,14 @@
         <br />
         <br />
     </header>
-    <asp:DropDownList ID="ddlApparaten" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlApparaten_SelectedIndexChanged">
-    </asp:DropDownList>
-    <br />
-    <div class="bg-light">
+    <div class="bg-gray">
         <div class="table table-borderless table-hover table-responsive table-striped">
             <br />
             <div style="width: 220px;" class="mx-auto">
-                <asp:Label class="title-black " runat="server" Text="Apparaten" />
+                <asp:Label class="title-black" runat="server" Text="Leveringen" />
+            </div>
+            <div style="width: 220px;" class="mx-auto">
+                <asp:DropDownList ID="ddlApparaten" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlApparaten_SelectedIndexChanged" />
             </div>
             <br />
             <asp:GridView ID="grvLeveringen" CssClass="col-sm-12" Style="margin: auto; width: 25%;" runat="server" EnableViewState="False" AllowPaging="True" AutoGenerateColumns="False" OnPageIndexChanging="grvLeveringen_PageIndexChanging" PageSize="4" OnRowDeleting="grvLeveringen_RowDeleting" OnRowEditing="grvLeveringen_RowEditing" OnRowCancelingEdit="grvLeveringen_RowCancelingEdit" OnRowUpdating="grvLeveringen_RowUpdating">
@@ -49,7 +50,7 @@
                     </asp:CommandField>
                 </Columns>
                 <EmptyDataTemplate>
-                    Er zijn geen leden aanwezig.
+                    Er zijn geen leveringen aanwezig.
                 </EmptyDataTemplate>
                 <PagerSettings Mode="NextPreviousFirstLast" />
             </asp:GridView>

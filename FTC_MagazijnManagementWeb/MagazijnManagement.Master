@@ -30,6 +30,7 @@
                 <asp:ContentPlaceHolder ID="nav" runat="server" />
             </div>
         </nav>
+        <!-- Head-->
         <div>
             <asp:ContentPlaceHolder ID="body1" runat="server">
                 <p>Deze pagina is onder constructie</p>

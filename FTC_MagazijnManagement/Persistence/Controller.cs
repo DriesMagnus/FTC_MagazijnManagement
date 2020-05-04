@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using FTC_MagazijnManagement.Business;
 
 namespace FTC_MagazijnManagement.Persistence
@@ -67,10 +68,17 @@ namespace FTC_MagazijnManagement.Persistence
         #endregion
 
         #region Levering
-        internal static List<Levering> GetLeveringenFromDb()
+
+        internal static List<Levering> GetAllLeveringenFromDb()
         {
             var leveringmapper = new LeveringMapper(ConnectionString);
-            return leveringmapper.GetLeveringenFromDb();
+            return leveringmapper.GetAllLeveringenFromDb();
+        }
+        
+        internal static List<Levering> GetLeveringenFromDb(int apparaatid)
+        {
+            var leveringmapper = new LeveringMapper(ConnectionString);
+            return leveringmapper.GetLeveringenFromDb(apparaatid);
         }
 
         internal static void AddLeveringToDb(Levering levering, int apparaatid)

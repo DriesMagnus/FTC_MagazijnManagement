@@ -49,7 +49,7 @@ namespace UnitTestProject1
             var delllaptop = c.AddApparaat("Dell", "Laptop");
 
             delllaptop.Naam = "HP";
-            c.UpdateApparaat(delllaptop);
+            //c.UpdateApparaat(delllaptop);
 
             Assert.AreEqual(c.GetApparaat(delllaptop.Id).Naam, "HP");
 

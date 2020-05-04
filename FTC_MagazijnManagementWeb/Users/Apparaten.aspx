@@ -4,7 +4,7 @@
     <title>Apparaten - Magazijn Management</title>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="nav" runat="server">
-    <a class="navbar-brand navbar-alt" href="/Default.aspx">Magazijn Management</a>
+    <a class="navbar-brand navbar-alt" href="../Default.aspx">Magazijn Management</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-alt ml-auto my-2 my-lg-0">
@@ -22,7 +22,7 @@
         <br />
         <br />
     </header>
-    <div class="bg-light">
+    <div class="bg-gray">
         <div class="table table-borderless table-hover table-responsive table-striped">
             <br />
             <div style="width: 220px;" class="mx-auto">
@@ -55,7 +55,7 @@
                     </asp:CommandField>
                 </Columns>
                 <EmptyDataTemplate>
-                    Er zijn geen leden aanwezig.
+                    Er zijn geen apparaten aanwezig.
                 </EmptyDataTemplate>
                 <PagerSettings Mode="NextPreviousFirstLast" />
             </asp:GridView>
@@ -64,6 +64,20 @@
                 <asp:Label ID="lblTotaal" runat="server" Text=""></asp:Label>
                 <br />
                 <br />
+            </div>
+            <br />
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Naam</label>
+                </div>
+                <input type="text" runat="server" class="form-control" id="iptNaam"/>
+                <div class="input-group-prepend">
+                    <span class="input-group-text ml-3">Type</span>
+                </div>
+                <input type="text" runat="server" class="form-control" id="iptType"/>
+                <div class="input-group-append ml-3">
+                    <asp:LinkButton ID="btnAddApparaat" CssClass="btn btn-outline-primary" runat="server" Text="<i class='fas fa-plus'> </i>Add"></asp:LinkButton>
+                </div>
             </div>
         </div>
     </div>

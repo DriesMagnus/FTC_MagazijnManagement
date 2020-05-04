@@ -24,14 +24,27 @@ namespace FTC_MagazijnManagementWeb.Users
                 ddlApparaten.DataTextField = "Naam";
                 ddlApparaten.DataValueField = "Id";
                 ddlApparaten.DataBind();
-                ToonInfo(Convert.ToInt32(ddlApparaten.SelectedValue));
+                if (leveringen.Count != 0)
+                {
+                    ToonInfo(Convert.ToInt32(ddlApparaten.SelectedValue));
+                }
+                else
+                {
+                    grvLeveringen.DataSource = null;
+                    grvLeveringen.DataBind();
+                }
+            }
+            else
+            {
+                grvLeveringen.DataSource =  c.GetApparaat(Convert.ToInt32(ddlApparaten.SelectedValue))._leveringen;
+                grvLeveringen.DataBind();
             }
 
             if (Session["apparaatnr"] != null)
             {
-                int lidNr = (int)Session["apparaatnr"];
+                var lidNr = (int)Session["apparaatnr"];
                 Session["apparaatnr"] = null;
-                ListItem item = ddlApparaten.Items.FindByValue(lidNr.ToString());
+                var item = ddlApparaten.Items.FindByValue(lidNr.ToString());
                 ddlApparaten.SelectedIndex = ddlApparaten.Items.IndexOf(item);
                 ToonInfo(Convert.ToInt32(ddlApparaten.SelectedValue));
             }
@@ -40,17 +53,17 @@ namespace FTC_MagazijnManagementWeb.Users
         private void ToonInfo(int id = 0)
         {
             c = (Controller)Session["controller"];
-            Apparaat apparaat = c.GetApparaat(id);
+            var apparaat = c.GetApparaat(id);
             if (apparaat != null)
             {
                 grvLeveringen.DataSource = apparaat._leveringen;
                 grvLeveringen.DataBind();
-                //lblInfo.Text = apparaat.ToString();
+                lblTotaal.Text = apparaat.ToString();
             }
             else
             {
                 grvLeveringen.DataSource = null;
-                //lblInfo.Text = "";
+                lblTotaal.Text = "";
             }
         }
 
@@ -82,17 +95,15 @@ namespace FTC_MagazijnManagementWeb.Users
 
         protected void grvLeveringen_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            int apparaatid = Convert.ToInt32(ddlApparaten.SelectedValue);
-            GridViewRow row = grvLeveringen.Rows[e.RowIndex];
-            int aantal = Convert.ToInt32(e.NewValues["Aantal"]);
-            string locatie = e.NewValues["Locatie"].ToString();
-            var levering = c.AddLevering(apparaatid, locatie, aantal);
+            var apparaatid = Convert.ToInt32(ddlApparaten.SelectedValue);
+            var aantal = Convert.ToInt32(e.NewValues["Aantal"]);
+            var locatie = e.NewValues["Locatie"].ToString();
 
-            c.UpdateLevering(levering);
+            c.UpdateLevering(e.RowIndex, aantal, locatie);
             grvLeveringen.EditIndex = -1;
             grvLeveringen.DataSource = c.GetAllLeveringen(c.GetApparaat(apparaatid));
             grvLeveringen.DataBind();
-            //ToonInfo(Convert.ToInt32(ddlApparaten.SelectedValue));
+            ToonInfo(Convert.ToInt32(ddlApparaten.SelectedValue));
         }
 
         protected void grvLeveringen_RowDeleting(object sender, GridViewDeleteEventArgs e)

@@ -38,12 +38,18 @@ namespace FTC_MagazijnManagement.Business
         {
             _leveringen.AddRange(lijst);
         }
+
         public int TotaleVoorraad()
         {
             var voorraad = 0;
             foreach (var levering in _leveringen) voorraad += levering.Aantal;
 
             return voorraad;
+        }
+
+        public override string ToString()
+        {
+            return $"Totale voorraad: {TotaleVoorraad()}";
         }
     }
 }

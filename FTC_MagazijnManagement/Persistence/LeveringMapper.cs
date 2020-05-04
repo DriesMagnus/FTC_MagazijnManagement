@@ -21,12 +21,36 @@ namespace FTC_MagazijnManagement.Persistence
 
         }
 
-        internal List<Levering> GetLeveringenFromDb()
+        internal List<Levering> GetAllLeveringenFromDb()
         {
             var _leveringen = new List<Levering>();
 
             var connection = new MySqlConnection(_connectionString);
             var command = new MySqlCommand("SELECT * from levering", connection);
+
+            connection.Open();
+            var dataReader = command.ExecuteReader();
+            while (dataReader.Read())
+            {
+                var _levering = new Levering(
+                    Convert.ToInt32(dataReader["Apparaat_Id"]),
+                    Convert.ToString(dataReader["Locatie"]),
+                    Convert.ToInt32(dataReader["Aantal"])
+                );
+                _leveringen.Add(_levering);
+            }
+
+            connection.Close();
+            return _leveringen;
+        }
+
+        internal List<Levering> GetLeveringenFromDb(int apparaatid)
+        {
+            var _leveringen = new List<Levering>();
+
+            var connection = new MySqlConnection(_connectionString);
+            var command = new MySqlCommand("SELECT * from levering WHERE Apparaat_Id=@apparaat_id", connection);
+            command.Parameters.AddWithValue("apparaat_id", apparaatid);
 
             connection.Open();
             var dataReader = command.ExecuteReader();
@@ -66,7 +90,7 @@ namespace FTC_MagazijnManagement.Persistence
             var connection = new MySqlConnection(_connectionString);
             var command = new MySqlCommand(
                 "UPDATE levering SET Locatie = @locatie, Aantal = @aantal, Apparaat_Id = @apparaat_id" +
-                " WHERE Apparaat_Id=@apparaat_id"
+                " WHERE Locatie=@locatie"
                 , connection);
             command.Parameters.AddWithValue("locatie", levering.Locatie);
             command.Parameters.AddWithValue("apparaat_id", levering.ApparaatId);
@@ -79,15 +103,15 @@ namespace FTC_MagazijnManagement.Persistence
 
         internal void RemoveLeveringInDb(Levering levering)
         {
-            var apparaat = GetApparaatFromLevering(levering);
+            var leveringen = GetAllLeveringenFromDb();
             
             var connection = new MySqlConnection(_connectionString);
             var command = new MySqlCommand(
                 "DELETE FROM levering" +
-                " WHERE Apparaat_Id=@apparaat_id"
+                " WHERE Locatie=@locatie"
                 , connection);
 
-            command.Parameters.AddWithValue("apparaat_id", apparaat.Id);
+            command.Parameters.AddWithValue("locatie", leveringen.Find(x => x.Locatie == levering.Locatie).Locatie);
 
             connection.Open();
             command.ExecuteNonQuery();

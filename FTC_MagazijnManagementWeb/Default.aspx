@@ -147,7 +147,6 @@
                 </div>
                 <div class="col-lg-4 mr-auto text-center">
                     <i class="fas fa-envelope fa-3x mb-3"></i>
-                    <!-- Make sure to change the email address in BOTH the anchor text and the link target below!-->
                     <p class="mb-5">
                         Offertes & Bestellingen:<a class="d-block" href="mailto:verkoop@ftc.be">verkoop@ftc.be</a>
                         Technische dienst:<a class="d-block" href="mailto:depot@ftc.be">depot@ftc.be</a>
