@@ -120,13 +120,9 @@ namespace FTC_MagazijnManagement.Business
         #region Levering
         public List<Levering> GetAllLeveringen(Apparaat apparaat)
         {
-            return Persistence.Controller.GetLeveringenFromDb(apparaat.Id);
+            return apparaat._leveringen;
         }
 
-        public List<Levering> GetAllLeveringen(int apparaatid)
-        {
-            return Persistence.Controller.GetLeveringenFromDb(apparaatid);
-        }
 
         public Levering GetLevering(int apparaatid, string locatie)
         {
@@ -148,20 +144,17 @@ namespace FTC_MagazijnManagement.Business
             var toUpdate = GetLevering(apparaatid, locatie);
             toUpdate.Aantal = aantal;
             toUpdate.Locatie = locatie;
-            toUpdate.ApparaatId = apparaatid;
             Persistence.Controller.UpdateLeveringInDb(toUpdate);
             return toUpdate;
         }
 
-        public void RemoveLevering(Levering levering)
-        {
-            Persistence.Controller.RemoveLeveringInDb(levering);
-        }
 
         public void RemoveLevering(int apparaatid, string locatie)
         {
             var levering = GetLevering(apparaatid, locatie);
             Persistence.Controller.RemoveLeveringInDb(levering);
+
+            GetApparaat(apparaatid)._leveringen.Remove(levering); //bruh
         }
         #endregion
     }

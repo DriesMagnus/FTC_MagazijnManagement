@@ -89,11 +89,10 @@ namespace FTC_MagazijnManagement.Persistence
         {
             var connection = new MySqlConnection(_connectionString);
             var command = new MySqlCommand(
-                "UPDATE levering SET Locatie = @locatie, Aantal = @aantal, Apparaat_Id = @apparaat_id" +
+                "UPDATE levering SET Locatie = @locatie, Aantal = @aantal" + //Apparaat kan niet aangepast worden
                 " WHERE Locatie=@locatie"
                 , connection);
             command.Parameters.AddWithValue("locatie", levering.Locatie);
-            command.Parameters.AddWithValue("apparaat_id", levering.ApparaatId);
             command.Parameters.AddWithValue("aantal", levering.Aantal);
             
             connection.Open();

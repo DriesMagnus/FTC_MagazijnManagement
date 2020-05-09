@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -9,22 +6,30 @@ using FTC_MagazijnManagement.Business;
 
 namespace FTC_MagazijnManagementWeb.Users
 {
-    public partial class Leveringen : System.Web.UI.Page
+    public partial class Leveringen : Page
     {
         private Controller c;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            c = (Controller)Session["controller"];
-            var leveringen = c.GetApparaatList();
+            c = (Controller) Session["controller"];
+            var apparaten = c.GetApparaatList();
 
             if (!IsPostBack)
             {
-                ddlApparaten.DataSource = leveringen;
+                ddlApparaten.DataSource = apparaten;
                 ddlApparaten.DataTextField = "Naam";
                 ddlApparaten.DataValueField = "Id";
                 ddlApparaten.DataBind();
-                if (leveringen.Count != 0)
+
+                ddlSelectApparaat.DataSource = apparaten;
+                ddlSelectApparaat.DataTextField = "Naam";
+                ddlSelectApparaat.DataValueField = "Id";
+                ddlSelectApparaat.DataBind();
+                ddlSelectApparaat.Items.Insert(0, new ListItem(string.Empty, string.Empty));
+                ddlSelectApparaat.SelectedIndex = 0;
+
+                if (apparaten.Count != 0)
                 {
                     ToonInfo(Convert.ToInt32(ddlApparaten.SelectedValue));
                 }
@@ -36,15 +41,15 @@ namespace FTC_MagazijnManagementWeb.Users
             }
             else
             {
-                grvLeveringen.DataSource =  c.GetApparaat(Convert.ToInt32(ddlApparaten.SelectedValue))._leveringen;
+                grvLeveringen.DataSource = c.GetApparaat(Convert.ToInt32(ddlApparaten.SelectedValue))._leveringen;
                 grvLeveringen.DataBind();
             }
 
             if (Session["apparaatnr"] != null)
             {
-                var lidNr = (int)Session["apparaatnr"];
+                var apparaatNr = (int) Session["apparaatnr"];
                 Session["apparaatnr"] = null;
-                var item = ddlApparaten.Items.FindByValue(lidNr.ToString());
+                var item = ddlApparaten.Items.FindByValue(apparaatNr.ToString());
                 ddlApparaten.SelectedIndex = ddlApparaten.Items.IndexOf(item);
                 ToonInfo(Convert.ToInt32(ddlApparaten.SelectedValue));
             }
@@ -52,7 +57,7 @@ namespace FTC_MagazijnManagementWeb.Users
 
         private void ToonInfo(int id = 0)
         {
-            c = (Controller)Session["controller"];
+            c = (Controller) Session["controller"];
             var apparaat = c.GetApparaat(id);
             if (apparaat != null)
             {
@@ -70,6 +75,7 @@ namespace FTC_MagazijnManagementWeb.Users
         protected void ddlApparaten_SelectedIndexChanged(object sender, EventArgs e)
         {
             ToonInfo(Convert.ToInt32(ddlApparaten.SelectedValue));
+            grvLeveringen.EditIndex = -1;
         }
 
         protected void grvLeveringen_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -99,7 +105,7 @@ namespace FTC_MagazijnManagementWeb.Users
             var aantal = Convert.ToInt32(e.NewValues["Aantal"]);
             var locatie = e.NewValues["Locatie"].ToString();
 
-            c.UpdateLevering(e.RowIndex, aantal, locatie);
+            c.UpdateLevering(apparaatid, aantal, locatie);
             grvLeveringen.EditIndex = -1;
             grvLeveringen.DataSource = c.GetAllLeveringen(c.GetApparaat(apparaatid));
             grvLeveringen.DataBind();
@@ -108,11 +114,12 @@ namespace FTC_MagazijnManagementWeb.Users
 
         protected void grvLeveringen_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            int rowindex = e.RowIndex;
-            GridViewRow row = grvLeveringen.Rows[rowindex];
-            int dataitemindex = grvLeveringen.Rows[rowindex].DataItemIndex;
-            int apparaatid = Convert.ToInt32(ddlApparaten.SelectedValue);
-            c.RemoveLevering(apparaatid, ((TextBox)row.Cells[2].Controls[0]).Text);
+            var rowindex = e.RowIndex;
+            var row = grvLeveringen.Rows[rowindex];
+            var dataitemindex = grvLeveringen.Rows[rowindex].DataItemIndex;
+            var apparaatid = Convert.ToInt32(ddlApparaten.SelectedValue);
+            c.RemoveLevering(apparaatid,
+                grvLeveringen.Rows[rowindex].Cells[1].Text); // ((TextBox)row.Cells[2].Controls[0]).Text
             ToonInfo(apparaatid);
         }
 
@@ -120,6 +127,68 @@ namespace FTC_MagazijnManagementWeb.Users
         {
             FormsAuthentication.SignOut();
             Response.Redirect("~/Default.aspx");
+        }
+
+        protected void btnAddLevering_OnClick(object sender, EventArgs e)
+        {
+            if (ddlSelectApparaat.SelectedIndex > 0)
+            {
+                var apparaat = c.GetApparaat(Convert.ToInt32(ddlSelectApparaat.SelectedValue));
+                var aantal = 0;
+                var rij = 0;
+                var vak = 0;
+                var gelukt = true;
+
+                try
+                {
+                    aantal = Convert.ToInt32(iptAantal.Value);
+                }
+                catch
+                {
+                    foutboodschap.Text = "Dit is geen valide aantal. Kijk na of u de juiste tekens heeft ingevoerd.";
+                    foutboodschap.Visible = true;
+                    gelukt = false;
+                }
+
+                try
+                {
+                    rij = Convert.ToInt32(iptRij.Value);
+                }
+                catch
+                {
+                    foutboodschap.Text = "Dit is geen valide rij. Kijk na of u de juiste tekens heeft ingevoerd.";
+                    foutboodschap.Visible = true;
+                    gelukt = false;
+                }
+
+                try
+                {
+                    vak = Convert.ToInt32(iptVak.Value);
+                }
+                catch
+                {
+                    foutboodschap.Text = "Dit is geen valide vak. Kijk na of u de juiste tekens heeft ingevoerd.";
+                    foutboodschap.Visible = true;
+                    gelukt = false;
+                }
+
+                if (gelukt)
+                {
+                    var locatie = $"({rij},{vak})";
+                    c.AddLevering(apparaat.Id, locatie, aantal);
+                    ToonInfo(apparaat.Id);
+                }
+            }
+            else
+            {
+                foutboodschap.Text = "U moet een apparaat selecteren.";
+                foutboodschap.Visible = true;
+            }
+
+            ddlSelectApparaat.SelectedIndex = 0;
+            iptAantal.Value = "";
+            iptRij.Value = "";
+            iptVak.Value = "";
         }
     }
 }

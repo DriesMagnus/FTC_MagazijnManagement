@@ -4,17 +4,6 @@ namespace FTC_MagazijnManagement.Business
 {
     internal class ApparaatRepository : Repository<Apparaat>
     {
-        private static List<Apparaat> _items = new List<Apparaat>();
-        
-        internal static List<Apparaat> Items { 
-            get { 
-                return _items; 
-            } 
-            private set { 
-                _items = value; 
-            } 
-        }
-
         internal override void AddItem(Apparaat apparaat)
         {
             Items.Add(apparaat);

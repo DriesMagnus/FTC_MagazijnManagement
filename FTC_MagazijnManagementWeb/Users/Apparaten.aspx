@@ -22,14 +22,15 @@
         <br />
         <br />
     </header>
+
     <div class="bg-gray">
         <div class="table table-borderless table-hover table-responsive table-striped">
             <br />
-            <div style="width: 220px;" class="mx-auto">
-                <asp:Label class="title-black " runat="server" Text="Apparaten" />
+            <div style="width: 220px;" class="mx-auto center">
+                <asp:Label class="title-black" runat="server" Text="Apparaten" />
             </div>
             <br />
-            <asp:GridView ID="grvLeveringen" DataKeyNames="Id" CssClass="col-sm-12" Style="margin: auto; width: 25%;" runat="server" EnableViewState="False" AllowPaging="True" AutoGenerateColumns="False" OnPageIndexChanging="grvLeveringen_PageIndexChanging" PageSize="4" OnSelectedIndexChanged="grvLeveringen_SelectedIndexChanged" OnRowDeleting="grvLeveringen_RowDeleting" OnRowEditing="grvLeveringen_RowEditing" OnRowCancelingEdit="grvLeveringen_RowCancelingEdit" OnRowUpdating="grvLeveringen_RowUpdating">
+            <asp:GridView ID="grvLeveringen" DataKeyNames="Id" CssClass="col-sm-12 center" Style="width: 25%;" runat="server" EnableViewState="False" AllowPaging="True" AutoGenerateColumns="False" OnPageIndexChanging="grvLeveringen_PageIndexChanging" PageSize="4" OnSelectedIndexChanged="grvLeveringen_SelectedIndexChanged" OnRowDeleting="grvLeveringen_RowDeleting" OnRowEditing="grvLeveringen_RowEditing" OnRowCancelingEdit="grvLeveringen_RowCancelingEdit" OnRowUpdating="grvLeveringen_RowUpdating">
                 <Columns>
                     <asp:BoundField DataField="Id" HeaderText="Id" Visible="False" />
                     <asp:BoundField DataField="Naam" HeaderText="Naam">
@@ -60,25 +61,25 @@
                 <PagerSettings Mode="NextPreviousFirstLast" />
             </asp:GridView>
             <br />
-            <div style="width: 250px;" class="mx-auto">
-                <asp:Label ID="lblTotaal" runat="server" Text=""></asp:Label>
+            <div style="width: 250px;" class="mx-auto center">
+                <asp:Label ID="lblTotaal" runat="server" Text="" />
                 <br />
                 <br />
             </div>
-            <br />
-            <div class="input-group mb-3">
+            <div class="input-group mb-3 center" style="width: 700px;">
                 <div class="input-group-prepend">
                     <label class="input-group-text">Naam</label>
                 </div>
-                <input type="text" runat="server" class="form-control" id="iptNaam"/>
+                <input type="text" runat="server" class="form-control" id="iptNaam" />
                 <div class="input-group-prepend">
-                    <span class="input-group-text ml-3">Type</span>
+                    <label class="input-group-text ml-3">Type</label>
                 </div>
-                <input type="text" runat="server" class="form-control" id="iptType"/>
+                <input type="text" runat="server" class="form-control" id="iptType" />
                 <div class="input-group-append ml-3">
-                    <asp:LinkButton ID="btnAddApparaat" CssClass="btn btn-outline-primary" runat="server" Text="<i class='fas fa-plus'> </i>Add"></asp:LinkButton>
+                    <asp:LinkButton ID="btnAddApparaat" CssClass="btn btn-outline-primary rounded-circle" runat="server" Text="<i class='fas fa-plus'> </i>" OnClick="btnAddApparaat_Click"></asp:LinkButton>
                 </div>
             </div>
+            <asp:Label runat="server" ID="foutboodschap" EnableViewState="False" Visible="False" CssClass="alert alert-danger center" />
         </div>
     </div>
 </asp:Content>

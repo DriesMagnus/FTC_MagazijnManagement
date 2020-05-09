@@ -14,5 +14,18 @@
             Locatie = locatie;
             Aantal = aantal;
         }
+
+
+
+        public void wijzigLevering(int aantal, string locatie)
+        {
+            Locatie = locatie;
+            Aantal = aantal;
+        }
+
+
+
+
+
     }
 }

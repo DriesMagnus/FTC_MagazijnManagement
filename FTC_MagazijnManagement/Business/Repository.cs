@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FTC_MagazijnManagement.Business;
 
 namespace FTC_MagazijnManagement.Business
@@ -21,10 +22,8 @@ namespace FTC_MagazijnManagement.Business
 
         internal int GetNextId()
         {
-            var maxId = 0;
-            foreach (Entity e in Items)
-                if (e.Id > maxId)
-                    maxId = e.Id;
+            var maxId = (from Entity e in Items select e.Id).Concat(new[] {0}).Max(); //yes Dries 5HEad
+
             return maxId + 1;
         }
     }
