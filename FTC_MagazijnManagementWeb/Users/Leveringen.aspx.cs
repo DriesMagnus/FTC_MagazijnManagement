@@ -141,6 +141,12 @@ namespace FTC_MagazijnManagementWeb.Users
                 try
                 {
                     aantal = Convert.ToInt32(iptAantal.Value);
+                    if (!(aantal > 0))
+                    {
+                        foutboodschap.Text = "Dit is geen valide aantal. Het aantal moet groter zijn dan 0";
+                        foutboodschap.Visible = true;
+                        gelukt = false;
+                    }
                 }
                 catch
                 {
@@ -152,6 +158,12 @@ namespace FTC_MagazijnManagementWeb.Users
                 try
                 {
                     rij = Convert.ToInt32(iptRij.Value);
+                    if (!(rij > 0))
+                    {
+                        foutboodschap.Text = "Dit is geen valide rij. Het rijnummer moet groter zijn dan 0";
+                        foutboodschap.Visible = true;
+                        gelukt = false;
+                    }
                 }
                 catch
                 {
@@ -163,6 +175,12 @@ namespace FTC_MagazijnManagementWeb.Users
                 try
                 {
                     vak = Convert.ToInt32(iptVak.Value);
+                    if (!(vak > 0))
+                    {
+                        foutboodschap.Text = "Dit is geen valide vak. Het vaknummer moet groter zijn dan 0";
+                        foutboodschap.Visible = true;
+                        gelukt = false;
+                    }
                 }
                 catch
                 {
@@ -170,7 +188,7 @@ namespace FTC_MagazijnManagementWeb.Users
                     foutboodschap.Visible = true;
                     gelukt = false;
                 }
-
+                
                 if (gelukt)
                 {
                     var locatie = $"({rij},{vak})";
