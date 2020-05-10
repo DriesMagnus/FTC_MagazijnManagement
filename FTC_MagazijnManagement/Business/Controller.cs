@@ -163,8 +163,7 @@ namespace FTC_MagazijnManagement.Business
         {
             var levering = GetLevering(apparaatid, locatie);
             Persistence.Controller.RemoveLeveringInDb(levering);
-
-            GetApparaat(apparaatid)._leveringen.Remove(levering); //bruh
+            GetApparaat(apparaatid)._leveringen.Remove(levering);
         }
         #endregion
     }

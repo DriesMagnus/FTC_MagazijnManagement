@@ -14,7 +14,6 @@ namespace FTC_MagazijnManagement.Business
             get { return _leveringen.Count; }
         }
 
-
         public string Naam { get; set; }
 
         public string Type { get; set; }

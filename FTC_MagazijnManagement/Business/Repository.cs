@@ -22,7 +22,7 @@ namespace FTC_MagazijnManagement.Business
 
         internal int GetNextId()
         {
-            var maxId = (from Entity e in Items select e.Id).Concat(new[] {0}).Max(); //yes Dries 5HEad
+            var maxId = (from Entity e in Items select e.Id).Concat(new[] {0}).Max();
 
             return maxId + 1;
         }
