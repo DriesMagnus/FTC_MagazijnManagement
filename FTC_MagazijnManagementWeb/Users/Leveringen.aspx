@@ -32,7 +32,7 @@
                 <asp:DropDownList ID="ddlApparaten" CssClass="form-control" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlApparaten_SelectedIndexChanged" />
             </div>
             <br />
-            <asp:GridView ID="grvLeveringen" CssClass="col-sm-12 center" Style="width: 25%;" runat="server" EnableViewState="False" AllowPaging="True" AutoGenerateColumns="False" OnPageIndexChanging="grvLeveringen_PageIndexChanging" PageSize="4" OnRowDeleting="grvLeveringen_RowDeleting" OnRowEditing="grvLeveringen_RowEditing" OnRowCancelingEdit="grvLeveringen_RowCancelingEdit" OnRowUpdating="grvLeveringen_RowUpdating">
+            <asp:GridView ID="grvLeveringen" CssClass="col-sm-12 center" Style="width: 25%;" runat="server" EnableViewState="False" AutoGenerateColumns="False" OnPageIndexChanging="grvLeveringen_PageIndexChanging" OnRowDeleting="grvLeveringen_RowDeleting" OnRowEditing="grvLeveringen_RowEditing" OnRowCancelingEdit="grvLeveringen_RowCancelingEdit" OnRowUpdating="grvLeveringen_RowUpdating">
                 <Columns>
                     <asp:BoundField DataField="Aantal" HeaderText="Aantal">
                         <HeaderStyle CssClass="center" />
@@ -60,7 +60,7 @@
                 <br />
                 <br />
             </div>
-            <div class="input-group mb-3 center" style="width: 700px;">
+            <div class="input-group mb-3 center" style="width: 800px;">
                 <div class="input-group-prepend">
                     <label class="input-group-text ml-3">Apparaat</label>
                 </div>

@@ -118,8 +118,7 @@ namespace FTC_MagazijnManagementWeb.Users
             var row = grvLeveringen.Rows[rowindex];
             var dataitemindex = grvLeveringen.Rows[rowindex].DataItemIndex;
             var apparaatid = Convert.ToInt32(ddlApparaten.SelectedValue);
-            c.RemoveLevering(apparaatid,
-                grvLeveringen.Rows[rowindex].Cells[1].Text); // ((TextBox)row.Cells[2].Controls[0]).Text
+            c.RemoveLevering(apparaatid, grvLeveringen.Rows[rowindex].Cells[1].Text);
             ToonInfo(apparaatid);
         }
 
@@ -145,7 +144,7 @@ namespace FTC_MagazijnManagementWeb.Users
                 }
                 catch
                 {
-                    foutboodschap.Text = "Dit is geen valide aantal. Kijk na of u de juiste tekens heeft ingevoerd.";
+                    foutboodschap.Text = "Dit is geen valide aantal. Kijk na of u een getal heeft ingevoerd.";
                     foutboodschap.Visible = true;
                     gelukt = false;
                 }
@@ -156,7 +155,7 @@ namespace FTC_MagazijnManagementWeb.Users
                 }
                 catch
                 {
-                    foutboodschap.Text = "Dit is geen valide rij. Kijk na of u de juiste tekens heeft ingevoerd.";
+                    foutboodschap.Text = "Dit is geen valide rij. Kijk na of u een getal heeft ingevoerd.";
                     foutboodschap.Visible = true;
                     gelukt = false;
                 }
@@ -167,7 +166,7 @@ namespace FTC_MagazijnManagementWeb.Users
                 }
                 catch
                 {
-                    foutboodschap.Text = "Dit is geen valide vak. Kijk na of u de juiste tekens heeft ingevoerd.";
+                    foutboodschap.Text = "Dit is geen valide vak. Kijk na of u een getal heeft ingevoerd.";
                     foutboodschap.Visible = true;
                     gelukt = false;
                 }
@@ -175,8 +174,27 @@ namespace FTC_MagazijnManagementWeb.Users
                 if (gelukt)
                 {
                     var locatie = $"({rij},{vak})";
-                    c.AddLevering(apparaat.Id, locatie, aantal);
-                    ToonInfo(apparaat.Id);
+                    var leveringen = c.GetLeveringList();
+                    var isUniek = true;
+
+                    foreach (var levering in leveringen)
+                    {
+                        if (c.GetLevering(levering.ApparaatId, locatie) == levering)
+                        {
+                            isUniek = false;
+                        }
+                    }
+
+                    if (isUniek)
+                    {
+                        c.AddLevering(apparaat.Id, locatie, aantal);
+                        ToonInfo(apparaat.Id);
+                    }
+                    else
+                    {
+                        foutboodschap.Text = "Deze locatie is al bezet, neem een andere waarde voor rij en/of vak.";
+                        foutboodschap.Visible = true;
+                    }
                 }
             }
             else

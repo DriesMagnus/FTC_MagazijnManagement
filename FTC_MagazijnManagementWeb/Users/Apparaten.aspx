@@ -30,7 +30,7 @@
                 <asp:Label class="title-black" runat="server" Text="Apparaten" />
             </div>
             <br />
-            <asp:GridView ID="grvLeveringen" DataKeyNames="Id" CssClass="col-sm-12 center" Style="width: 25%;" runat="server" EnableViewState="False" AllowPaging="True" AutoGenerateColumns="False" OnPageIndexChanging="grvLeveringen_PageIndexChanging" PageSize="4" OnSelectedIndexChanged="grvLeveringen_SelectedIndexChanged" OnRowDeleting="grvLeveringen_RowDeleting" OnRowEditing="grvLeveringen_RowEditing" OnRowCancelingEdit="grvLeveringen_RowCancelingEdit" OnRowUpdating="grvLeveringen_RowUpdating">
+            <asp:GridView ID="grvLeveringen" DataKeyNames="Id" CssClass="col-sm-12 center" Style="width: 25%;" runat="server" EnableViewState="False" AutoGenerateColumns="False" OnPageIndexChanging="grvLeveringen_PageIndexChanging" OnSelectedIndexChanged="grvLeveringen_SelectedIndexChanged" OnRowDeleting="grvLeveringen_RowDeleting" OnRowEditing="grvLeveringen_RowEditing" OnRowCancelingEdit="grvLeveringen_RowCancelingEdit" OnRowUpdating="grvLeveringen_RowUpdating">
                 <Columns>
                     <asp:BoundField DataField="Id" HeaderText="Id" Visible="False" />
                     <asp:BoundField DataField="Naam" HeaderText="Naam">
@@ -70,11 +70,11 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text">Naam</label>
                 </div>
-                <input type="text" runat="server" class="form-control" id="iptNaam" />
+                <input type="text" runat="server" class="form-control" id="iptNaam" maxlength="22" />
                 <div class="input-group-prepend">
                     <label class="input-group-text ml-3">Type</label>
                 </div>
-                <input type="text" runat="server" class="form-control" id="iptType" />
+                <input type="text" runat="server" class="form-control" id="iptType" maxlength="22" />
                 <div class="input-group-append ml-3">
                     <asp:LinkButton ID="btnAddApparaat" CssClass="btn btn-outline-primary rounded-circle" runat="server" Text="<i class='fas fa-plus'> </i>" OnClick="btnAddApparaat_Click"></asp:LinkButton>
                 </div>

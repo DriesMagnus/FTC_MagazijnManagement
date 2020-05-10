@@ -123,6 +123,17 @@ namespace FTC_MagazijnManagement.Business
             return apparaat._leveringen;
         }
 
+        public List<Levering> GetLeveringList()
+        {
+            var apparaten = _apparaatRepository.GetAll();
+            var leveringen = new List<Levering>();
+            foreach (var apparaat in apparaten)
+            {
+                leveringen.AddRange(apparaat._leveringen);
+            }
+
+            return leveringen;
+        }
 
         public Levering GetLevering(int apparaatid, string locatie)
         {
@@ -147,7 +158,6 @@ namespace FTC_MagazijnManagement.Business
             Persistence.Controller.UpdateLeveringInDb(toUpdate);
             return toUpdate;
         }
-
 
         public void RemoveLevering(int apparaatid, string locatie)
         {
