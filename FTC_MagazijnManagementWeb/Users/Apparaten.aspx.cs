@@ -99,18 +99,20 @@ namespace FTC_MagazijnManagementWeb.Users
                 naam = Convert.ToString(iptNaam.Value);
                 if (string.IsNullOrEmpty(naam) || string.IsNullOrWhiteSpace(naam))
                 {
-                    foutboodschap.Text = "Dit is geen valide naam. Kijk na of u de juiste tekens heeft ingevoerd.";
+                    foutboodschap.Text = "Ongeldige naam of geen gegevens ingevuld. Begin opnieuw.";
                     foutboodschap.Visible = true;
-                    gelukt = false;
                     iptNaam.Value = "";
                     iptType.Value = "";
+                    gelukt = false;
+                    goto Finish;
                 }
             }
             catch
             {
-                foutboodschap.Text = "Dit is geen valide naam. Kijk na of u de juiste tekens heeft ingevoerd.";
+                foutboodschap.Text = "Ongeldige naam. Begin opnieuw.";
                 foutboodschap.Visible = true;
                 gelukt = false;
+                goto Finish;
             }
 
             try
@@ -118,25 +120,29 @@ namespace FTC_MagazijnManagementWeb.Users
                 type = Convert.ToString(iptType.Value);
                 if (string.IsNullOrEmpty(type) || string.IsNullOrWhiteSpace(type))
                 {
-                    foutboodschap.Text = "Dit is geen valide type. Kijk na of u de juiste tekens heeft ingevoerd.";
+                    foutboodschap.Text = "Ongeldig type of geen type ingevuld. Begin opnieuw.";
                     foutboodschap.Visible = true;
-                    gelukt = false;
                     iptNaam.Value = "";
                     iptType.Value = "";
+                    gelukt = false;
+                    goto Finish;
                 }
             }
             catch
             {
-                foutboodschap.Text = "Dit is geen valide type. Kijk na of u de juiste tekens heeft ingevoerd.";
+                foutboodschap.Text = "Ongeldig type. Begin opnieuw.";
                 foutboodschap.Visible = true;
                 gelukt = false;
+                goto Finish;
             }
 
+            c.AddApparaat(naam, type);
+            grvLeveringen.DataSource = c.GetApparaatList();
+            grvLeveringen.DataBind();
+            
+            Finish:
             if (gelukt)
             {
-                c.AddApparaat(naam, type);
-                grvLeveringen.DataSource = c.GetApparaatList();
-                grvLeveringen.DataBind();
                 iptNaam.Value = "";
                 iptType.Value = "";
             }

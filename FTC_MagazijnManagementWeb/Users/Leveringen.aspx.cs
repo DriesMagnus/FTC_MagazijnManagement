@@ -130,29 +130,31 @@ namespace FTC_MagazijnManagementWeb.Users
 
         protected void btnAddLevering_OnClick(object sender, EventArgs e)
         {
+            var gelukt = true;
             if (ddlSelectApparaat.SelectedIndex > 0)
             {
                 var apparaat = c.GetApparaat(Convert.ToInt32(ddlSelectApparaat.SelectedValue));
                 var aantal = 0;
                 var rij = 0;
                 var vak = 0;
-                var gelukt = true;
 
                 try
                 {
                     aantal = Convert.ToInt32(iptAantal.Value);
                     if (!(aantal > 0))
                     {
-                        foutboodschap.Text = "Dit is geen valide aantal. Het aantal moet groter zijn dan 0";
+                        foutboodschap.Text = "Ongeldig aantal. Het aantal moet groter zijn dan 0.";
                         foutboodschap.Visible = true;
                         gelukt = false;
+                        goto Finish;
                     }
                 }
                 catch
                 {
-                    foutboodschap.Text = "Dit is geen valide aantal. Kijk na of u een getal heeft ingevoerd.";
+                    foutboodschap.Text = "Ongeldig aantal.";
                     foutboodschap.Visible = true;
                     gelukt = false;
+                    goto Finish;
                 }
 
                 try
@@ -160,16 +162,18 @@ namespace FTC_MagazijnManagementWeb.Users
                     rij = Convert.ToInt32(iptRij.Value);
                     if (!(rij > 0))
                     {
-                        foutboodschap.Text = "Dit is geen valide rij. Het rijnummer moet groter zijn dan 0";
+                        foutboodschap.Text = "Ongeldige rij. Het rijnummer moet groter zijn dan 0.";
                         foutboodschap.Visible = true;
                         gelukt = false;
+                        goto Finish;
                     }
                 }
                 catch
                 {
-                    foutboodschap.Text = "Dit is geen valide rij. Kijk na of u een getal heeft ingevoerd.";
+                    foutboodschap.Text = "Ongeldige rij.";
                     foutboodschap.Visible = true;
                     gelukt = false;
+                    goto Finish;
                 }
 
                 try
@@ -177,16 +181,18 @@ namespace FTC_MagazijnManagementWeb.Users
                     vak = Convert.ToInt32(iptVak.Value);
                     if (!(vak > 0))
                     {
-                        foutboodschap.Text = "Dit is geen valide vak. Het vaknummer moet groter zijn dan 0";
+                        foutboodschap.Text = "Ongeldig vak. Het vaknummer moet groter zijn dan 0.";
                         foutboodschap.Visible = true;
                         gelukt = false;
+                        goto Finish;
                     }
                 }
                 catch
                 {
-                    foutboodschap.Text = "Dit is geen valide vak. Kijk na of u een getal heeft ingevoerd.";
+                    foutboodschap.Text = "Ongeldig vak.";
                     foutboodschap.Visible = true;
                     gelukt = false;
+                    goto Finish;
                 }
                 
                 if (gelukt)
@@ -210,21 +216,25 @@ namespace FTC_MagazijnManagementWeb.Users
                     }
                     else
                     {
-                        foutboodschap.Text = "Deze locatie is al bezet, neem een andere waarde voor rij en/of vak.";
+                        foutboodschap.Text = "Deze locatie is al bezet. Neem een andere waarde voor rij en/of vak.";
                         foutboodschap.Visible = true;
                     }
                 }
             }
             else
             {
-                foutboodschap.Text = "U moet een apparaat selecteren.";
+                foutboodschap.Text = "Geen apparaat geselecteerd.";
                 foutboodschap.Visible = true;
             }
 
             ddlSelectApparaat.SelectedIndex = 0;
-            iptAantal.Value = "";
-            iptRij.Value = "";
-            iptVak.Value = "";
+            Finish:
+            if (gelukt)
+            {
+                iptAantal.Value = "";
+                iptRij.Value = "";
+                iptVak.Value = "";
+            }
         }
     }
 }

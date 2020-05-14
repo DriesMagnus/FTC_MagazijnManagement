@@ -4,9 +4,6 @@ namespace FTC_MagazijnManagement.Business
 {
     public class Apparaat : Entity
     {
-        /// <summary>
-        /// De reden waarom we deze publiek maken is wegens we de gegevens moeten updaten in de database.
-        /// </summary>
         public List<Levering> _leveringen;
 
         public int LeveringAmount

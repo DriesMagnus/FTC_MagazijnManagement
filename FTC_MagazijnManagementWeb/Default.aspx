@@ -19,10 +19,10 @@
                             <li>
                                 <div>
                                     <div class="form-group">
-                                        <input type="text" name="gebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required="required" />
+                                        <input type="text" name="gebruikersnaam" class="form-control" placeholder="admin" required="required" />
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="paswoord" class="form-control" placeholder="Wachtwoord" required="required" />
+                                        <input type="password" name="paswoord" class="form-control" placeholder="admin" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <asp:Label runat="server" ID="foutboodschap" EnableViewState="False" Visible="False" CssClass="alert alert-danger justify-content-center autowidth" />
@@ -63,8 +63,7 @@
                 </div>
                 <div class="col-lg-9 align-self-baseline">
                     <p class="text-white-75 font-weight-light mb-5">
-                        Heeft u een nieuwe laptop, desktop, tablet, ... nodig maar wilt u liever minder betalen?
-                       
+                        Heeft u een laptop, desktop, tablet, ... nodig aan een betaalbare prijs?
                         <br />
                         Bij P-Generation bent u aan het juiste adres!
                     </p>
@@ -80,7 +79,7 @@
                 <div class="col-lg-9 text-center">
                     <h2 class="text-white mt-0">Over ons</h2>
                     <hr class="divider light my-4" />
-                    <p class="text-white-75 font-weight-light mb-5">FTC P-Generation handelt in tweedehandstoestellen sinds 2003, vooral in laptops en desktops. Zij zijn vrijwel de enige in de Belgische groothandel en zijn recent ook meer gaan focussen op particulieren. Hun grootste verkoopcijfers gaan naar scholen maar een groot aantal particulieren komen naar FTC voor de goede prijs-kwaliteitverhouding en garantie op een groot bereik aan producten.</p>
+                    <p class="text-white-75 font-weight-light mb-5">FTC P-Generation handelt in tweedehandstoestellen sinds 2003, vooral in laptops en desktops. Zij zijn vrijwel de enige in de Belgische groothandel en zijn recent ook meer gaan focussen op particulieren. Hun grootste verkoopcijfers gaan naar scholen. Particulieren komen naar FTC omwille van de goede prijs-kwaliteitverhouding en garantie op een groot bereik aan producten.</p>
                     <a class="btn btn-light btn-xl js-scroll-trigger" href="https://pgeneration.be/shop/">Onze webshop</a>
                 </div>
             </div>
@@ -166,10 +165,10 @@
                     <h2 class="text-white mt-0">Over mij</h2>
                     <hr class="divider light my-4" />
                     <p class="text-white-75 font-weight-light mb-5">
-                        Ik ben Dries Magnus en ik ben 18 jaar. Ik studeer dit jaar af in de richting Informaticabeheer aan de Secundaire Handelsschool Sint-Lodewijk.<br />
-                        Voor mijn eindwerk moest ik een web-applicatie maken die de gebruiker toelaat om een magazijn te beheren die apparaten en leveringen bevat.<br />
+                        Mijn naam is Dries Magnus. Als 18-jarige rond ik dit jaar mijn studies Informaticabeheer af aan de Secundaire Handelsschool Sint-Lodewijk.<br />
+                        Voor mijn eindwerk heb ik opdracht gekregen om een web-applicatie te maken die de gebruiker toelaat om de apparaten en leveringen van een magazijn te beheren.<br />
                         <br />
-                        Om toegang te krijgen tot deze applicatie, druk op de oranje login knop rechtsboven.
+                        <i>Om toegang te krijgen tot deze applicatie, druk op de oranje login knop rechtsboven.</i>
                     </p>
                 </div>
             </div>
